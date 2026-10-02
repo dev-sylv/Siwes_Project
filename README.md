@@ -1,2 +1,5 @@
-# Siwes_Project
-A MERN stack web portal for the Computer Science department at UNIZIK, giving students one place to find timetables, lecturers, excos and announcements, with a guide for freshers. Built during my 12-week SIWES/IT programme.
+# CS Department Student Guide Portal
+
+A web application that helps Computer Science students (especially freshers) find current timetables, lecturers, excos and department announcements in one place. Course reps upload timetables, the department president sends announcements, and admins manage roles.
+
+Built with MongoDB, Express, React and Node.js as my SIWES (Industrial Training) project.
