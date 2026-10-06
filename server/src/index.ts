@@ -4,6 +4,7 @@ import cors from "cors";
 import connectDB from "./config/db";
 import { notFound, errorHandler } from "./middleware/errorHandler";
 import authRoutes from "./router/auth";
+import roleRoutes from "./routes/";
 
 const app = express();
 
@@ -14,9 +15,8 @@ app.get("/api/health", (_req: Request, res: Response) => {
   res.json({ status: "ok", message: "CS Guide API is running" });
 });
 console.log("working");
-app.use(notFound);
-app.use(errorHandler);
 app.use("/api/auth", authRoutes);
+app.use("/api/roles", roleRoutes);
 app.use(notFound);
 app.use(errorHandler);
 

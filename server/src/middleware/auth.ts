@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
-import User, { IUser } from "../models/user";
+import User, { IUser, Role } from "../models/user";
 
 export interface AuthRequest extends Request {
   user?: IUser;
@@ -39,3 +39,13 @@ export const protect = async (
     next(error);
   }
 };
+
+export const authorize =
+  (...roles: Role[]) =>
+  (req: AuthRequest, res: Response, next: NextFunction): void => {
+    if (!req.user || !roles.includes(req.user.role)) {
+      res.status(403);
+      return next(new Error("You do not have permission to do this"));
+    }
+    next();
+  };
