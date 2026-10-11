@@ -4,17 +4,7 @@ import CourseAssignment from "../models/courseAssignment";
 import Exco from "../models/excos";
 import Session from "../models/session";
 import asyncHandler, { httpError } from "../utils/asyncHandler";
-
-// Use the session from the request, or fall back to the current one
-const resolveSessionId = async (
-  res: Response,
-  requested?: string,
-): Promise<string> => {
-  if (requested) return requested;
-  const current = await Session.findOne({ isCurrent: true });
-  if (!current) httpError(res, 404, "No current session has been set");
-  return String(current!._id);
-};
+import resolveSessionId from "../utils/resolveSessions";
 
 // ---------- Lecturers ----------
 export const createLecturer = asyncHandler(async (req, res) => {
