@@ -2,9 +2,12 @@ import "dotenv/config";
 import express, { Request, Response } from "express";
 import cors from "cors";
 import connectDB from "./config/db";
-import { notFound, errorHandler } from "./middleware/errorHandler";
+import { errorHandler } from "./middleware/errorHandler";
 import authRoutes from "./router/auth";
-import roleRoutes from "./routes/";
+import sessionRoutes from "./router/session";
+import rolesRoutes from "./router/roleRequest";
+import courseRoutes from "./router/course";
+import directoryRoutes from "./router/directory";
 
 const app = express();
 
@@ -16,8 +19,10 @@ app.get("/api/health", (_req: Request, res: Response) => {
 });
 console.log("working");
 app.use("/api/auth", authRoutes);
-app.use("/api/roles", roleRoutes);
-app.use(notFound);
+app.use("/api/roles", rolesRoutes);
+app.use("/api/sessions", sessionRoutes);
+app.use("/api/courses", courseRoutes);
+app.use("/api/directory", directoryRoutes);
 app.use(errorHandler);
 
 const PORT = Number(process.env.PORT) || 5000;
