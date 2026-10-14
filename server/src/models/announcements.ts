@@ -3,6 +3,7 @@ import { Schema, model, Document, Types } from "mongoose";
 export interface IAnnouncement extends Document {
   title: string;
   message: string;
+  pinned: boolean;
   targetLevel: number | null; // null means everyone
   postedBy: Types.ObjectId;
 }
@@ -12,6 +13,7 @@ const announcementSchema = new Schema<IAnnouncement>(
     title: { type: String, required: true, trim: true },
     message: { type: String, required: true },
     targetLevel: { type: Number, default: null },
+    pinned: { type: Boolean, default: false },
     postedBy: { type: Schema.Types.ObjectId, ref: "User", required: true },
   },
   { timestamps: true },

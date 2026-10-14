@@ -9,6 +9,7 @@ import rolesRoutes from "./router/roleRequest";
 import courseRoutes from "./router/course";
 import directoryRoutes from "./router/directory";
 import timetableRoutes from "./router/timeTable";
+import announcementRoutes from "./router/announcements";
 
 const app = express();
 
@@ -18,13 +19,13 @@ app.use(express.json());
 app.get("/api/health", (_req: Request, res: Response) => {
   res.json({ status: "ok", message: "CS Guide API is running" });
 });
-console.log("working");
 app.use("/api/auth", authRoutes);
 app.use("/api/roles", rolesRoutes);
 app.use("/api/sessions", sessionRoutes);
 app.use("/api/courses", courseRoutes);
 app.use("/api/directory", directoryRoutes);
 app.use("/api/timetable", timetableRoutes);
+app.use("/api/announcements", announcementRoutes);
 app.use(errorHandler);
 
 const PORT = Number(process.env.PORT) || 5000;
