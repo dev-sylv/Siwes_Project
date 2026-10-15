@@ -127,6 +127,7 @@ export const announcementSchema = Joi.object({
   targetLevel: Joi.number()
     .valid(...LEVELS)
     .allow(null),
+  notifyByEmail: Joi.boolean(),
   pinned: Joi.boolean(),
 });
 

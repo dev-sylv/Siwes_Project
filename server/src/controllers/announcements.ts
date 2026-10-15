@@ -1,11 +1,14 @@
 import Announcement from "../models/announcements";
 import asyncHandler, { httpError } from "../utils/asyncHandler";
+import User from "../models/user";
+import { sendAnnouncementEmail } from "../utils/mailer";
 
 const canSeeAll = (role: string): boolean =>
   role === "president" || role === "admin";
 
 export const createAnnouncement = asyncHandler(async (req, res) => {
-  const { title, message, targetLevel, pinned } = req.body;
+  const { title, message, targetLevel, pinned, notifyByEmail } = req.body;
+
   const announcement = await Announcement.create({
     title,
     message,
@@ -13,7 +16,19 @@ export const createAnnouncement = asyncHandler(async (req, res) => {
     pinned: Boolean(pinned),
     postedBy: req.user!._id,
   });
-  res.status(201).json(announcement);
+
+  let emailRecipients = 0;
+  if (notifyByEmail) {
+    const audience = targetLevel ? { level: targetLevel } : {};
+    const users = await User.find(audience).select("email");
+    const emails = users.map((u) => u.email);
+    emailRecipients = emails.length;
+
+    // runs in the background so the president isn't kept waiting
+    void sendAnnouncementEmail(emails, title, message);
+  }
+
+  res.status(201).json({ ...announcement.toObject(), emailRecipients });
 });
 
 export const getAnnouncements = asyncHandler(async (req, res) => {
