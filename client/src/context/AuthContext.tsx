@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  type ReactNode,
+} from "react";
 import api, { clearToken, getToken, setToken } from "../lib/api";
 import type { AuthResponse, User } from "../types";
 
@@ -49,7 +55,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const login = async (email: string, password: string) => {
-    const { data } = await api.post<AuthResponse>("/auth/login", { email, password });
+    const { data } = await api.post<AuthResponse>("/auth/login", {
+      email,
+      password,
+    });
     handleAuth(data);
   };
 
