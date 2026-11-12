@@ -31,6 +31,14 @@ export const loginSchema = Joi.object({
   password: Joi.string().required(),
 });
 
+export const forgotPasswordSchema = Joi.object({
+  email: Joi.string().email().required(),
+});
+
+export const resetPasswordSchema = Joi.object({
+  password: Joi.string().min(6).max(72).required(),
+});
+
 // ---------- Roles ----------
 export const roleRequestSchema = Joi.object({
   requestedRole: Joi.string().valid("course_rep", "president").required(),

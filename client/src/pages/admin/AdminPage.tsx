@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Card, EmptyState, PageHeader } from "../../components/ui";
 import ExcosAdmin from "./ExcosAdmin";
+import RoleRequestsAdmin from "./RoleRequestsAdmin";
 
 const TABS = [
   { key: "requests", label: "Role Requests" },
@@ -14,7 +15,7 @@ const TABS = [
 type TabKey = (typeof TABS)[number]["key"];
 
 export default function AdminPage() {
-  const [tab, setTab] = useState<TabKey>("excos");
+  const [tab, setTab] = useState<TabKey>("requests");
 
   return (
     <>
@@ -38,7 +39,9 @@ export default function AdminPage() {
         ))}
       </div>
 
-      {tab === "excos" ? (
+      {tab === "requests" ? (
+        <RoleRequestsAdmin />
+      ) : tab === "excos" ? (
         <ExcosAdmin />
       ) : (
         <Card>

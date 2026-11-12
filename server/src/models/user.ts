@@ -8,6 +8,8 @@ export interface IUser extends Document {
   password: string;
   role: Role;
   level: number;
+  resetPasswordToken?: string;
+  resetPasswordExpires?: Date;
 }
 
 const userSchema = new Schema<IUser>(
@@ -27,6 +29,8 @@ const userSchema = new Schema<IUser>(
       default: "student",
     },
     level: { type: Number, required: true, min: 100, max: 500 },
+    resetPasswordToken: { type: String, select: false },
+    resetPasswordExpires: { type: Date, select: false },
   },
   { timestamps: true },
 );

@@ -64,8 +64,12 @@ export const getRoleRequests = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const status = (req.query.status as string) || "pending";
-    const requests = await RoleRequest.find({ status!: status })
+    const status = req.query.status as string | undefined;
+    const filter =
+      status && ["pending", "approved", "rejected"].includes(status)
+        ? { status }
+        : {};
+    const requests = await RoleRequest.find(filter)
       .populate("user", "name email level role")
       .sort({ createdAt: -1 });
     res.json(requests);

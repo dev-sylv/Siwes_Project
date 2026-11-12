@@ -63,6 +63,13 @@ export default function Login() {
             required
           />
         </Field>
+        <div className="-mt-1.5 text-right">
+          <Link
+            to="/forgot-password"
+            className="text-sm font-medium text-indigo-600 hover:underline">
+            Forgot password?
+          </Link>
+        </div>
 
         <button className={buttonClass} disabled={submitting}>
           {submitting ? "Logging in..." : "Log in"}

@@ -9,6 +9,8 @@ import Timetable from "./pages/Timetable";
 import Announcements from "./pages/Announcements";
 import Directory from "./pages/Directory";
 import AdminPage from "./pages/admin/AdminPage";
+import ResetPassword from "./pages/ResetPassword";
+import ForgotPassword from "./pages/ForgotPassword";
 
 const Placeholder = ({ title }: { title: string }) => <h2>{title}</h2>;
 
@@ -19,6 +21,8 @@ export default function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route element={<ProtectedRoute />}>
             <Route element={<Layout />}>
               <Route path="/" element={<Dashboard />} />

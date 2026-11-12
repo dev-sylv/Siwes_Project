@@ -5,6 +5,7 @@ import { courseInfo, formatDate, formatTime } from "../lib/helpers";
 import { Badge, Card, EmptyState, Loading, PageHeader } from "../components/ui";
 import { ErrorAlert } from "../components/AuthLayout";
 import type { Announcement, TimetableEntry } from "../types";
+import RoleRequestCard from "../components/RoleRequestCard";
 
 export default function Dashboard() {
   const { user } = useAuth();
@@ -105,6 +106,11 @@ export default function Dashboard() {
           )}
         </Card>
       </div>
+      {(user?.role === "student" || user?.role === "course_rep") && (
+        <div className="mt-5 max-w-xl">
+          <RoleRequestCard />
+        </div>
+      )}
     </>
   );
 }

@@ -12,6 +12,7 @@ import timetableRoutes from "./router/timeTable";
 import announcementRoutes from "./router/announcements";
 
 const app = express();
+app.set("trust proxy", 1);
 
 app.use(cors({ origin: process.env.CLIENT_URL }));
 app.use(express.json());

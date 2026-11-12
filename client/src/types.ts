@@ -74,3 +74,14 @@ export interface DirectoryData {
   excos: Exco[];
   courseLecturers: CourseAssignment[];
 }
+
+export interface RoleRequest {
+  _id: string;
+  user:
+    | { _id: string; name: string; email: string; level: number; role: Role }
+    | string;
+  requestedRole: "course_rep" | "president";
+  reason: string;
+  status: "pending" | "approved" | "rejected";
+  createdAt: string;
+}
