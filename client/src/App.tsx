@@ -4,6 +4,11 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Layout from "./components/Layout";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Dashboard from "./pages/Dashboard";
+import Timetable from "./pages/Timetable";
+import Announcements from "./pages/Announcements";
+import Directory from "./pages/Directory";
+import AdminPage from "./pages/admin/AdminPage";
 
 const Placeholder = ({ title }: { title: string }) => <h2>{title}</h2>;
 
@@ -16,19 +21,10 @@ export default function App() {
           <Route path="/register" element={<Register />} />
           <Route element={<ProtectedRoute />}>
             <Route element={<Layout />}>
-              <Route path="/" element={<Placeholder title="Dashboard" />} />
-              <Route
-                path="/timetable"
-                element={<Placeholder title="Timetable" />}
-              />
-              <Route
-                path="/directory"
-                element={<Placeholder title="Directory" />}
-              />
-              <Route
-                path="/announcements"
-                element={<Placeholder title="Announcements" />}
-              />
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/timetable" element={<Timetable />} />
+              <Route path="/directory" element={<Directory />} />
+              <Route path="/announcements" element={<Announcements />} />
               <Route
                 path="/guide"
                 element={<Placeholder title="Freshers' Guide" />}
@@ -48,7 +44,7 @@ export default function App() {
                 />
               </Route>
               <Route element={<ProtectedRoute roles={["admin"]} />}>
-                <Route path="/admin" element={<Placeholder title="Admin" />} />
+                <Route path="/admin" element={<AdminPage />} />
               </Route>
             </Route>
           </Route>

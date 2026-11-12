@@ -47,3 +47,30 @@ export interface Announcement {
   postedBy?: { _id: string; name: string } | string;
   createdAt: string;
 }
+
+export interface Lecturer {
+  _id: string;
+  name: string;
+  title?: string;
+  email?: string;
+  isHod?: boolean;
+}
+
+export interface Exco {
+  _id: string;
+  position: string;
+  name: string;
+}
+
+export interface CourseAssignment {
+  _id: string;
+  course: Pick<Course, "_id" | "code" | "title" | "level" | "semester">;
+  lecturer: Lecturer;
+}
+
+export interface DirectoryData {
+  session: { _id: string; name: string } | null;
+  hod: Lecturer | null;
+  excos: Exco[];
+  courseLecturers: CourseAssignment[];
+}
