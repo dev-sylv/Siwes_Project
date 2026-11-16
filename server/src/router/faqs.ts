@@ -1,11 +1,6 @@
 import { Router } from "express";
 import { protect, authorize } from "../middleware/auth";
-import {
-  getFaqs,
-  createFaq,
-  updateFaq,
-  deleteFaq,
-} from "../controllers/faqController";
+import { getFaqs, createFaq, updateFaq, deleteFaq } from "../controllers/faqs";
 
 const router = Router();
 

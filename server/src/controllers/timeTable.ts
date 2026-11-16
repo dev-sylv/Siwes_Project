@@ -2,7 +2,16 @@ import { Response } from "express";
 import TimetableEntry from "../models/timetableEntry";
 import Course, { ICourse } from "../models/course";
 import asyncHandler, { httpError } from "../utils/asyncHandler";
+import { AuthRequest } from "../middleware/auth";
 import resolveSessionId from "../utils/resolveSessions";
+
+type Day =
+  | "Monday"
+  | "Tuesday"
+  | "Wednesday"
+  | "Thursday"
+  | "Friday"
+  | "Saturday";
 
 const DAYS = [
   "Monday",
@@ -26,7 +35,7 @@ const assertNoClash = async (
   res: Response,
   o: {
     session: string;
-    day: string;
+    day: Day;
     startTime: string;
     endTime: string;
     level: number;
@@ -35,7 +44,7 @@ const assertNoClash = async (
 ): Promise<void> => {
   const sameDay = await TimetableEntry.find({
     session: o.session,
-    day: o.day,
+    day: o.day as Day,
     ...(o.excludeId ? { _id: { $ne: o.excludeId } } : {}),
   }).populate<{ course: ICourse }>("course", "code level");
 
@@ -157,8 +166,8 @@ const loadManageable = async (
   }>("course", "code level");
   if (!entry) httpError(res, 404, "Timetable entry not found");
   if (
-    req.user!.role === "course_rep" &&
-    entry!.course.level !== req.user!.level
+    (req as AuthRequest).user!.role === "course_rep" &&
+    entry!.course.level !== (req as AuthRequest).user!.level
   ) {
     httpError(res, 403, "You can only manage the timetable for your own level");
   }
