@@ -62,7 +62,7 @@ const features = [
   "Class timetables for every level",
   "HOD, excos and course lecturers",
   "Department announcements",
-  "Freshers' guide and CGPA calculator",
+  "Student guide and CGPA tracker",
 ];
 
 export default function AuthLayout({

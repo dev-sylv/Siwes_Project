@@ -1,7 +1,11 @@
 import { useState } from "react";
-import { Card, EmptyState, PageHeader } from "../../components/ui";
+import { PageHeader } from "../../components/ui";
 import ExcosAdmin from "./ExcosAdmin";
 import RoleRequestsAdmin from "./RoleRequestsAdmin";
+import SessionsAdmin from "./SessionsAdmin";
+import CoursesAdmin from "./CoursesAdmin";
+import LecturersAdmin from "./LecturersAdmin";
+import AssignmentsAdmin from "./AssignmentsAdmin";
 
 const TABS = [
   { key: "requests", label: "Role Requests" },
@@ -39,15 +43,12 @@ export default function AdminPage() {
         ))}
       </div>
 
-      {tab === "requests" ? (
-        <RoleRequestsAdmin />
-      ) : tab === "excos" ? (
-        <ExcosAdmin />
-      ) : (
-        <Card>
-          <EmptyState message="This section is coming next." />
-        </Card>
-      )}
+      {tab === "requests" && <RoleRequestsAdmin />}
+      {tab === "sessions" && <SessionsAdmin />}
+      {tab === "courses" && <CoursesAdmin />}
+      {tab === "lecturers" && <LecturersAdmin />}
+      {tab === "assignments" && <AssignmentsAdmin />}
+      {tab === "excos" && <ExcosAdmin />}
     </>
   );
 }

@@ -8,7 +8,7 @@ const links: { to: string; label: string; roles?: Role[] }[] = [
   { to: "/timetable", label: "Timetable" },
   { to: "/directory", label: "Directory" },
   { to: "/announcements", label: "Announcements" },
-  { to: "/guide", label: "Freshers' Guide" },
+  { to: "/guide", label: "Student Guide" },
   {
     to: "/manage/timetable",
     label: "Manage Timetable",

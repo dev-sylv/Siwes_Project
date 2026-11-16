@@ -8,11 +8,12 @@ import Dashboard from "./pages/Dashboard";
 import Timetable from "./pages/Timetable";
 import Announcements from "./pages/Announcements";
 import Directory from "./pages/Directory";
+import Guide from "./pages/Guide";
+import ManageTimetable from "./pages/ManageTimetable";
+import PostAnnouncement from "./pages/PostAnnouncement";
 import AdminPage from "./pages/admin/AdminPage";
 import ResetPassword from "./pages/ResetPassword";
 import ForgotPassword from "./pages/ForgotPassword";
-
-const Placeholder = ({ title }: { title: string }) => <h2>{title}</h2>;
 
 export default function App() {
   return (
@@ -29,22 +30,16 @@ export default function App() {
               <Route path="/timetable" element={<Timetable />} />
               <Route path="/directory" element={<Directory />} />
               <Route path="/announcements" element={<Announcements />} />
-              <Route
-                path="/guide"
-                element={<Placeholder title="Freshers' Guide" />}
-              />
+              <Route path="/guide" element={<Guide />} />
               <Route
                 element={<ProtectedRoute roles={["course_rep", "admin"]} />}>
-                <Route
-                  path="/manage/timetable"
-                  element={<Placeholder title="Manage Timetable" />}
-                />
+                <Route path="/manage/timetable" element={<ManageTimetable />} />
               </Route>
               <Route
                 element={<ProtectedRoute roles={["president", "admin"]} />}>
                 <Route
                   path="/announcements/new"
-                  element={<Placeholder title="Post Announcement" />}
+                  element={<PostAnnouncement />}
                 />
               </Route>
               <Route element={<ProtectedRoute roles={["admin"]} />}>
