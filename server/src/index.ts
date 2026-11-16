@@ -14,7 +14,20 @@ import announcementRoutes from "./router/announcements";
 const app = express();
 app.set("trust proxy", 1);
 
-app.use(cors({ origin: process.env.CLIENT_URL }));
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://siwes-project-beta.vercel.app",
+];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  }),
+);
+
 app.use(express.json());
 
 app.get("/api/health", (_req: Request, res: Response) => {
